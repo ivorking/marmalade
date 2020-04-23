@@ -4,7 +4,7 @@ function App() {
   return (
     <div>
       { /* FeaturedMix */}
-      <FeaturedMix />
+      <FeaturedMix />x
       <div>
         <div>
 
