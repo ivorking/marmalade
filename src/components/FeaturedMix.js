@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 
 const FeaturedMix = props => (
-    <div>
+    <div className='w-50-l vh-100 flex items-center justify-center cover bg-center bg-featured pad-bottom fixed-l left-0'>
       { /* FeaturedMix */}
-      <p>Featured mix</p>
-      <h1>Mint cond 27 Nov 2017</h1>
-      <h2>ridiculous</h2>
+      <div className='w-100 tc pa3'>
+        <p className = 'b biryani f6 white ttu'>Featured mix</p>
+        <h1>Mint cond 27 Nov 2017</h1>
+        <h2>ridiculous</h2>
+      </div>
     </div>
 );
 
