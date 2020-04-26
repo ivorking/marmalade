@@ -1,11 +1,11 @@
+/* global Mixcloud */
 import React, {Component} from 'react';
 import Header from './Header';
 import FeaturedMix from './FeaturedMix';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 const Home = () => (
@@ -21,6 +21,36 @@ const About = () => (
 )
 
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      playing: false,
+      currentMix: ''
+    }
+  }
+
+  mountAudio = async() => {
+    this.widget = Mixcloud.PlayerWidget(this.player);
+    await this.widget.ready;
+    this.widget.events.pause.on(() => console.log('paused'));
+    this.widget.events.play.on(() => console.log('is playing'));
+  }
+
+  componentDidMount() {
+    this.mountAudio()
+  }
+
+  togglePlay = () => {
+    this.widget.togglePlay();
+  }
+
+  playMix = mixName => {
+    // load new mix, start playing
+    this.widget.load(mixName, true);
+    this.widget.play();
+  }
+
   render() {
     return (
       <Router>
@@ -30,6 +60,17 @@ class App extends Component {
             <FeaturedMix />
             <div className='w-50-l relative z-1'>
               <Header />
+
+              <div>
+                <button onClick={this.togglePlay}>Play/pause</button>
+              </div>
+
+              <div>
+                <button onClick={() => this.playMix
+                  ('/deejee-esamurai/progressive-psytrance-march-2017-mix/')}>
+                  Play mix
+                </button>
+              </div>
 
               {/* React routes */}
               <Switch>
@@ -52,6 +93,7 @@ class App extends Component {
             src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&feed=%2Fdarkmodulator%2Fblutengel-megamix-from-dj-dark-modulator%2F" 
             frameBorder="0"
             className='player db fixed bottom-0 z-5'
+            ref={player => (this.player = player)}
           />
         </div>  
       </Router> 
