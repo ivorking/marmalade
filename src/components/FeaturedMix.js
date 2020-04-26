@@ -5,7 +5,7 @@ const FeaturedMix = props => (
       { /* FeaturedMix */}
       <div className='w-100 tc pa3'>
         <p className = 'b biryani f6 white ttu'>Featured mix</p>
-        <h1>Mint cond 27 Nov 2017</h1>
+        <h1 className = 'mix-title mt0 mb2 anton white ttu'>Mint cond 27 Nov 2017</h1>
         <h2>ridiculous</h2>
       </div>
     </div>
