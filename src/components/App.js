@@ -7,8 +7,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Home from './Home'
 
-const Home = () => <h1>Home</h1>;
 const Archive = () => <h1>Archive</h1>;
 const About = () => <h1>About</h1>;
 
@@ -58,7 +58,7 @@ class App extends Component {
               <h2>Currently playing: {this.state.currentMix}</h2>
 
               <div>
-                <button onClick={this.togglePlay}
+                <button onClick={this.togglePlay}>
                 {this.state.playing ? 'Pause' : 'Play'}
                 </button>
               </div>
