@@ -8,17 +8,9 @@ import {
   Route
 } from "react-router-dom";
 
-const Home = () => (
-  <h1>Home</h1>
-)
-
-const Archive = () => (
-  <h1>Archive</h1>
-)
-
-const About = () => (
-  <h1>About</h1>
-)
+const Home = () => <h1>Home</h1>;
+const Archive = () => <h1>Archive</h1>;
+const About = () => <h1>About</h1>;
 
 class App extends Component {
 
@@ -46,9 +38,11 @@ class App extends Component {
   }
 
   playMix = mixName => {
+    this.setState({
+      currentMix: mixName
+    })
     // load new mix, start playing
     this.widget.load(mixName, true);
-    this.widget.play();
   }
 
   render() {
@@ -61,29 +55,33 @@ class App extends Component {
             <div className='w-50-l relative z-1'>
               <Header />
 
+              <h2>Currently playing: {this.state.currentMix}</h2>
+
               <div>
-                <button onClick={this.togglePlay}>Play/pause</button>
+                <button onClick={this.togglePlay}
+                {this.state.playing ? 'Pause' : 'Play'}
+                </button>
               </div>
 
               <div>
                 <button onClick={() => this.playMix
                   ('/deejee-esamurai/progressive-psytrance-march-2017-mix/')}>
-                  Play mix
+                  Play Trance
+                </button>
+              </div>
+
+              <div>
+                <button onClick={() => this.playMix
+                  ('/NerdShow/nerd-throwback-2012-03-may-2020/')}>
+                  Play Nerdshow
                 </button>
               </div>
 
               {/* React routes */}
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/archive">
-                  <Archive />
-                </Route>
-                <Route path="/about">
-                  <About />
-                </Route>
-              </Switch>
+
+                <Route exact path="/" component = {Home} />
+                <Route path="/archive" compoent = {Archive} />
+                <Route path="/about" comonent = {About} />
 
             </div>
           </div>
