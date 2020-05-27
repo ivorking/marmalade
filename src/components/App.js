@@ -45,6 +45,10 @@ class App extends Component {
     this.widget.load(mixName, true);
   }
 
+  actions = {
+    
+  }
+
   render() {
     return (
       <Router>
