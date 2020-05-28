@@ -18,7 +18,7 @@ class App extends Component {
     super(props)
     this.state = {
       playing: false,
-      currentMix: ''
+      currentMix: 'muggins mix'
     }
   }
 
@@ -33,20 +33,18 @@ class App extends Component {
     this.mountAudio()
   }
 
-  togglePlay = () => {
-    this.widget.togglePlay();
-  }
-
-  playMix = mixName => {
-    this.setState({
-      currentMix: mixName
-    })
-    // load new mix, start playing
-    this.widget.load(mixName, true);
-  }
 
   actions = {
-    
+    togglePlay: () => {
+      this.widget.togglePlay();
+    },
+    playMix: mixName => {
+      this.setState({
+        currentMix: mixName
+      })
+      // load new mix, start playing
+      this.widget.load(mixName, true);
+    }
   }
 
   render() {
@@ -83,7 +81,7 @@ class App extends Component {
 
               {/* React routes */}
 
-                <Route exact path="/" component = {Home} />
+                <Route exact path="/" component = {() => <Home {...this.state} {...this.actions} name = 'lawrence' />} />
                 <Route path="/archive" compoent = {Archive} />
                 <Route path="/about" comonent = {About} />
 
