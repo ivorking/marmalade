@@ -1,11 +1,10 @@
 import React from 'react';
-import PlayButton from './PlayButton'
-import PlayMix from './PlayMix'
 
-const PlayMix = ({playMix, id, children}) => (
-    <div className = 'pointer' onClick - {() => playMix(id)}>
-        {children}
+const PlayMix = ({playMix, id, currentMix, children}) => (
+    <div className = {`pointer ${id === currentMix && 'playing'}`} onClick = {() => 
+        playMix(id)}>
+            {children}
     </div>
-)
+);
 
 export default PlayMix;
