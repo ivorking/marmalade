@@ -8,6 +8,7 @@ import {
   Route
 } from "react-router-dom";
 import Home from './Home'
+import mixesData from '../data/mixes'
 
 const Archive = () => <h1>Archive</h1>;
 const About = () => <h1>About</h1>;
@@ -15,11 +16,31 @@ const About = () => <h1>About</h1>;
 class App extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       playing: false,
-      currentMix: 'muggins mix'
+      currentMix: '',
+      mix: null,
+      mixIds: mixesData,
+      mixes: []
     }
+  }
+
+  fetchMixes = async () => {
+
+    const {mixIds} = this.state;
+    mixIds.map(async id => {
+
+      try {
+        const response = await fetch(`https://api.mixcloud.com${id}`);
+        const data = await response.json()
+        this.setState((prevState, props) => ({
+          mixes: [...prevState.mixes, data]
+        }))
+      } catch (error) {
+      }
+
+    })
   }
 
   mountAudio = async() => {
@@ -31,14 +52,18 @@ class App extends Component {
 
   componentDidMount() {
     this.mountAudio()
+    this.fetchMixes()
   }
-
 
   actions = {
     togglePlay: () => {
       this.widget.togglePlay();
     },
     playMix: mixName => {
+      const {currentMix} = this.state
+      if (mixName === currentMix) {
+        return this.widget.togglePlay()
+      }
       this.setState({
         currentMix: mixName
       })
@@ -56,9 +81,7 @@ class App extends Component {
             <FeaturedMix />
             <div className='w-50-l relative z-1'>
               <Header />
-
-              <h2>Currently playing: {this.state.currentMix}</h2>
-
+              {/* 
               <div>
                 <button onClick={this.togglePlay}>
                 {this.state.playing ? 'Pause' : 'Play'}
@@ -70,18 +93,18 @@ class App extends Component {
                   ('/deejee-esamurai/progressive-psytrance-march-2017-mix/')}>
                   Play Trance
                 </button>
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <button onClick={() => this.playMix
                   ('/NerdShow/nerd-throwback-2012-03-may-2020/')}>
                   Play Nerdshow
                 </button>
-              </div>
+              </div> */}
 
               {/* React routes */}
 
-                <Route exact path="/" component = {() => <Home {...this.state} {...this.actions} name = 'lawrence' />} />
+                <Route exact path="/" component = {() => <Home {...this.state} {...this.actions} />} />
                 <Route path="/archive" compoent = {Archive} />
                 <Route path="/about" comonent = {About} />
 
