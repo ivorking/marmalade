@@ -9,8 +9,8 @@ import {
 } from "react-router-dom";
 import Home from './Home'
 import mixesData from '../data/mixes'
+import Archive from './Archive'
 
-const Archive = () => <h1>Archive</h1>;
 const About = () => <h1>About</h1>;
 
 class App extends Component {
@@ -109,9 +109,9 @@ class App extends Component {
 
               {/* React routes */}
 
-                <Route exact path="/" component = {() => <Home {...this.state} {...this.actions} />} />
-                <Route path="/archive" compoent = {Archive} />
-                <Route path="/about" comonent = {About} />
+                <Route exact path="/" render ={() => <Home {...this.state} {...this.actions} />} />
+                <Route path="/archive" render = {() => <Archive {...this.state} {...this.actions} />} />
+                <Route path="/about" component = {About} />
 
             </div>
           </div>
