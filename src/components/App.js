@@ -86,27 +86,7 @@ class App extends Component {
             <FeaturedMix {...this.state} {...this.actions} {...firstMix} id = {firstMix.key}/>
             <div className='w-50-l relative z-1'>
               <Header />
-              {/* 
-              <div>
-                <button onClick={this.togglePlay}>
-                {this.state.playing ? 'Pause' : 'Play'}
-                </button>
-              </div>
-
-              <div>
-                <button onClick={() => this.playMix
-                  ('/deejee-esamurai/progressive-psytrance-march-2017-mix/')}>
-                  Play Trance
-                </button>
-              </div> */}
-
-              {/* <div>
-                <button onClick={() => this.playMix
-                  ('/NerdShow/nerd-throwback-2012-03-may-2020/')}>
-                  Play Nerdshow
-                </button>
-              </div> */}
-
+ 
               {/* React routes */}
 
                 <Route exact path="/" render ={() => <Home {...this.state} {...this.actions} />} />
