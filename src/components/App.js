@@ -10,8 +10,7 @@ import {
 import Home from './Home'
 import mixesData from '../data/mixes'
 import Archive from './Archive'
-
-const About = () => <h1>About</h1>;
+import About from './About'
 
 class App extends Component {
 
