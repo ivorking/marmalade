@@ -90,7 +90,7 @@ class App extends Component {
 
                 <Route exact path="/" render ={() => <Home {...this.state} {...this.actions} />} />
                 <Route path="/archive" render = {() => <Archive {...this.state} {...this.actions} />} />
-                <Route path="/about" component = {About} />
+                <Route path="/about" render = {() => <About {...this.state} />} />
 
             </div>
           </div>
